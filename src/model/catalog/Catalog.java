@@ -21,6 +21,9 @@ public class Catalog {
         loadCatalog();
     }
 
+    /**
+     * Loads the pre-defined data into the catalog
+     */
     private void loadCatalog(){
         catalog.add(new Product("Mouse", 10.99, 0.2, new ROShippingRate()));
         catalog.add(new Product("Keyboard", 40.99, 0.7, new UKShippingRate()));
@@ -30,6 +33,10 @@ public class Catalog {
         catalog.add(new Product("Desk Lamp", 89.99, 1.3, new UKShippingRate()));
     }
 
+    /**
+     * @param name name of the new Product instance we want to create
+     * @return a new Product instance with the corresponding price, weight and shipping rate based on the name
+     */
     public Product getProduct(String name){
         name = name.toLowerCase(Locale.ROOT);
         return switch (name) {

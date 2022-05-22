@@ -39,18 +39,6 @@ public class Console {
         }
     }
 
-    private void displayCatalog(){
-        System.out.println(controller.getCatalog());
-    }
-
-    private void addToCart(){
-        System.out.println("Enter product name: ");
-        Scanner scanner = new Scanner(System.in);
-        String productName = scanner.nextLine();
-        controller.addToCart(productName);
-        displayCartContent();
-    }
-
     private void printMenu(){
         System.out.println("1. Display catalog.");
         System.out.println("2. Add product to cart.");
@@ -62,6 +50,18 @@ public class Console {
         menu.put(1, this::displayCatalog);
         menu.put(2, this::addToCart);
         menu.put(3, this::checkout);
+    }
+
+    private void displayCatalog(){
+        System.out.println(controller.getCatalog());
+    }
+
+    private void addToCart(){
+        System.out.println("Enter product name: ");
+        Scanner scanner = new Scanner(System.in);
+        String productName = scanner.nextLine();
+        controller.addToCart(productName);
+        displayCartContent();
     }
 
     private void displayCartContent(){

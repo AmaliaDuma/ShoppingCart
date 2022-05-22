@@ -26,15 +26,10 @@ public class Controller {
         initializeCount();
     }
 
-    private void initializeCount(){
-        productsCount.put("Mouse", 0);
-        productsCount.put("Keyboard", 0);
-        productsCount.put("Monitor", 0);
-        productsCount.put("Webcam", 0);
-        productsCount.put("Headphones", 0);
-        productsCount.put("Desk Lamp", 0);
-    }
-
+    /**
+     * Adds a product to the shopping cart
+     * @param productName name of the product to be added in the cart
+     */
     public void addToCart(String productName){
         Product product = catalog.getProduct(productName);
         shoppingCart.add(product);
@@ -43,6 +38,10 @@ public class Controller {
         productsCount.put(product.getName(), prev+1);
     }
 
+    /**
+     * Calculates the subtotal for all products in the cart
+     * @return sum of each product price
+     */
     public double calculateSubtotal(){
         double sum = 0;
         for (Product p: shoppingCart){
@@ -51,6 +50,10 @@ public class Controller {
         return sum;
     }
 
+    /**
+     * Calculates the shipping fee for all products in the cart
+     * @return total shipping fee
+     */
     public double calculateShippingFee(){
         double sum = 0;
         for (Product p: shoppingCart){
@@ -59,10 +62,29 @@ public class Controller {
         return sum;
     }
 
+    /**
+     * Calculates the total as: subtotal + shipping fee
+     * @return total price
+     */
     public double calculateTotal(){
         return calculateSubtotal() + calculateShippingFee();
     }
 
+    /**
+     * Calculates the VAT for all products in the cart
+     * @param total total price from which we compute VAT
+     * @return total VAT
+     */
+    public double calculateVAT(double total){
+        return 0.19 * total;
+    }
+
+    /**
+     * Applies discounts on total price and returns the new total.
+     * For every discount that is applicable, we store it in a HashMap as < description, value subtracted>
+     * @param total total price from which we substract the discounts
+     * @return new total price
+     */
     public double applyDiscounts(double total){
         if (productsCount.get("Keyboard")!=0){
             double discount = 4.09 * productsCount.get("Keyboard");
@@ -84,12 +106,12 @@ public class Controller {
         return total;
     }
 
-    public double calculateVAT(double total){
-        return 0.19 * total;
+    private void initializeCount(){
+        productsCount.put("Mouse", 0);
+        productsCount.put("Keyboard", 0);
+        productsCount.put("Monitor", 0);
+        productsCount.put("Webcam", 0);
+        productsCount.put("Headphones", 0);
+        productsCount.put("Desk Lamp", 0);
     }
-
-
-
-
-
 }
